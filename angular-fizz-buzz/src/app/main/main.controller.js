@@ -1,7 +1,9 @@
 export class MainController {
-
-  constructor ($log) {
+  constructor () {
     'ngInject';
+
+    this.numberNWordMap = new Map();
+    this.collections = [];
   }
 
   basicFizzBuzz() {
@@ -28,5 +30,26 @@ export class MainController {
     });
   }
 
+  initMappings() {
+    this.numberNWordMap.set(3, "Fizz");
+    this.numberNWordMap.set(5, "Buzz");
+  }
 
+  showFizzBuzz() {
+    this.initMappings();
+    for ( var i=0; i<100; i++ ) {
+      var tempWord = "";
+
+      for (var [key, value] of this.numberNWordMap ) {
+        if ( i % key == 0 ) {
+          tempWord = tempWord + value
+        }
+      }
+      if( tempWord == "") {
+        tempWord = i.toString();
+      }
+      console.log(tempWord);
+      this.collections.push(tempWord);
+    }
+  }
 }
